@@ -12,7 +12,7 @@ module.exports = {
    defaultNetwork: "goerli",
    networks: {
       hardhat: {},
-      mumbai: {
+      Goerli: {
          url: API_URL,
          accounts: [`0x${PRIVATE_KEY}`],
          gas: 210000000,
