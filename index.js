@@ -27,7 +27,7 @@ const API_URL = process.env.API_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 
-const {abi} = require('./artifacts/contracts/TaskManagementSystem.sol/TaskManagementSystem.json');
+const {abi} = require('./artifacts/contracts/TaskManager.sol/TaskManagementSystem.json');
 const provider = new ethers.providers.JsonRpcProvider(API_URL);
 
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);

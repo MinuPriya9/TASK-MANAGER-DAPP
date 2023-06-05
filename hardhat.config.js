@@ -15,8 +15,10 @@ module.exports = {
       mumbai: {
          url: API_URL,
          accounts: [`0x${PRIVATE_KEY}`],
-         gas: 210000000,
-         gasPrice: 800000000000,
+         gas: 210000,
+         gasPrice: 8000000,
       }
    },
 }
+
+//Contract address: 0x2e86bDE2Bd792c6ea8B2216fCeB53530248E0930

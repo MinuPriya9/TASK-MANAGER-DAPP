@@ -114,4 +114,49 @@ let contractAbi = [
           "name": "status",
           "type": "uint8"
         }
-      ];
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
+      const connectMetamask = async() => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        WALLET_CONNECTED = await signer.getAddress();
+        var element = document.getElementById("metamasknotification");
+        element.innerHTML = "Metamask is connected " + WALLET_CONNECTED;
+    }
+    
+    const getAllTasks = async() => {
+        if(WALLET_CONNECTED != 0) {
+            var p3 = document.getElementById("p3");
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+            const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+            p3.innerHTML = "Please wait, getting all the tasks from the smart contract";
+            var tasks = await contractInstance.getAllTasks();
+            
+            var table = document.getElementById("myTable");
+    
+            for (let i = 0; i < tasks.length; i++) {
+                var row = table.insertRow();
+                var idCell = row.insertCell();
+                var descCell = row.insertCell();
+                var statusCell = row.insertCell();
+    
+                const status = tasks[i].status == 0 ? "Pending" : "Finished";
+    
+                idCell.innerHTML = i;
+                descCell.innerHTML = tasks[i].desc;
+                statusCell.innerHTML = status;
+            }
+    
+            p3.innerHTML = "The tasks are updated"
+        }
+        else {
+            var p3 = document.getElementById("p3");
+            p3.innerHTML = "Please connect metamask first";
+        }
+    }
